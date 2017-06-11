@@ -1,4 +1,4 @@
-# generator-legion [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-brain-cli [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > A generator helps for brain-cli framework
 
 ## Installation
@@ -25,12 +25,12 @@ yo brain-cli
 
 ## License
 
-MIT © [duanguang]()
+MIT © [duanguang](https://github.com/duanguang/generator-brain-cli)
 
 
-[npm-image]: https://badge.fury.io/js/generator-legion.svg
-[npm-url]: https://npmjs.org/package/generator-legion
-[travis-image]: https://travis-ci.org/jf3096/generator-legion.svg?branch=master
-[travis-url]: https://travis-ci.org/jf3096/generator-legion
-[daviddm-image]: https://david-dm.org/jf3096/generator-legion.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/jf3096/generator-legion
+[npm-image]: https://badge.fury.io/js/generator-brain-cli.svg
+[npm-url]: https://npmjs.org/package/generator-brain-cli
+[travis-image]: https://travis-ci.org/duanguang/generator-brain-cli.svg?branch=master
+[travis-url]: https://travis-ci.org/duanguang/generator-brain-cli
+[daviddm-image]: https://david-dm.org/duanguang/generator-brain-cli.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/duanguang/generator-brain-cli
