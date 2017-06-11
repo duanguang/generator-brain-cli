@@ -1,5 +1,5 @@
 # generator-legion [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> A generator helps for legion framework
+> A generator helps for brain-cli framework
 
 ## Installation
 
