@@ -1,0 +1,32 @@
+{
+  "name": "generator-brain-cli",
+  "version": "0.0.26",
+  "description": "A yeoman generator used for brain framework to create scaffold",
+  "author": {
+    "name": "duanguang",
+    "email": ""
+  },
+  "main": "index.js",
+  "keywords": [
+    "brain",
+    "generator-legion",
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "axios": "^0.15.3",
+    "chalk": "^1.1.3",
+    "del": "^2.2.2",
+    "yeoman-generator": "^1.0.0",
+    "yosay": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^7.0.5",
+    "@types/yeoman-generator": "^1.0.1"
+  },
+
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT"
+}
