@@ -9,7 +9,7 @@
   "main": "index.js",
   "keywords": [
     "brain",
-    "generator-legion",
+    "generator-brain",
     "yeoman-generator"
   ],
   "dependencies": {
