@@ -1,10 +1,10 @@
 {
   "name": "generator-brain-cli",
-  "version": "0.0.30",
+  "version": "0.0.32",
   "description": "A yeoman generator used for brain framework to create scaffold",
   "author": {
     "name": "duanguang",
-    "email": ""
+    "email": "492466509@qq.com"
   },
   "main": "index.js",
   "keywords": [

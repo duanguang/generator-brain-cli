@@ -20,6 +20,20 @@ export default class BaseGenerator extends Generator {
         message: string;
         choices: string[];
         default: string;
+    } | {
+        type: string;
+        name: string;
+        message: string;
+    } | {
+        type: string;
+        name: string;
+        message: string;
+        default: string;
+    } | {
+        type: string;
+        name: string;
+        message: string;
+        choices: string[];
     })[];
     protected _prompting(questions?: Question[]): Promise<void>;
     protected createVue(): Promise<void>;

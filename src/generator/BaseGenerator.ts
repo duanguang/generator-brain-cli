@@ -46,6 +46,29 @@ export default class BaseGenerator extends Generator {
                 default: 'react'
             },
             {
+                type: 'input',
+                name: 'projectDesc',
+                message: 'Please input project description:'
+            },
+            {
+                type: 'input',
+                name: 'projectMain',
+                message: 'Main file (index.js):',
+                default: 'index.js'
+            },
+            {
+                type: 'input',
+                name: 'projectAuthor',
+                message: 'Author (other):',
+                default: 'other she'
+            },
+            {
+                type: 'list',
+                name: 'projectLicense',
+                message: 'Please choose license:',
+                choices: ['MIT', 'ISC', 'Apache-2.0', 'AGPL-3.0']
+            },
+            {
                 type: 'list',
                 name: 'compiler',
                 required: true,
@@ -74,7 +97,13 @@ export default class BaseGenerator extends Generator {
         await downloadAndGenerate(template,rootDir);
         const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
         const destinationPackageJSON = this.destinationPath('package.json');
-        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {
+            appName: this.answers.appName,
+            projectDesc:this.answers.projectDesc,
+            projectMain:this.answers.projectMain,
+            projectAuthor:this.answers.projectAuthor,
+            projectLicense:this.answers.projectLicense
+        });
     }
     protected async createAngular(){
         const rootDir = path.join(process.cwd(),'');
@@ -82,7 +111,13 @@ export default class BaseGenerator extends Generator {
         await downloadAndGenerate(template,rootDir);
         const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
         const destinationPackageJSON = this.destinationPath('package.json');
-        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {
+            appName: this.answers.appName,
+            projectDesc:this.answers.projectDesc,
+            projectMain:this.answers.projectMain,
+            projectAuthor:this.answers.projectAuthor,
+            projectLicense:this.answers.projectLicense
+        });
         const sourceAngular = `${rootDir}/.gitkeep-angular.json`;
         const destinationAngularJSON = this.destinationPath('angular.json');
         this.fs.copyTpl(sourceAngular, destinationAngularJSON, {appName: this.answers.appName});
@@ -93,7 +128,13 @@ export default class BaseGenerator extends Generator {
         await downloadAndGenerate(template,rootDir);
         const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
         const destinationPackageJSON = this.destinationPath('package.json');
-        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {
+            appName: this.answers.appName,
+            projectDesc:this.answers.projectDesc,
+            projectMain:this.answers.projectMain,
+            projectAuthor:this.answers.projectAuthor,
+            projectLicense:this.answers.projectLicense
+        });
     }
     protected async createReactMobile(){
         const rootDir = path.join(process.cwd(),'');
@@ -101,7 +142,13 @@ export default class BaseGenerator extends Generator {
         await downloadAndGenerate(template,rootDir);
         const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
         const destinationPackageJSON = this.destinationPath('package.json');
-        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {
+            appName: this.answers.appName,
+            projectDesc:this.answers.projectDesc,
+            projectMain:this.answers.projectMain,
+            projectAuthor:this.answers.projectAuthor,
+            projectLicense:this.answers.projectLicense
+        });
     } 
     protected async _writing() {
         const {answers} = this;
