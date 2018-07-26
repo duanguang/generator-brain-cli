@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Generator = require("yeoman-generator");
 const index_1 = require("../utils/io/index");
@@ -6,6 +14,7 @@ const constants_1 = require("../constants/constants");
 const index_2 = require("../utils/validation/index");
 const path = require("path");
 const index_3 = require("../utils/data/index");
+const down_1 = require("../utils/down/down");
 class BaseGenerator extends Generator {
     constructor(args, opts) {
         super(args, opts);
@@ -34,6 +43,14 @@ class BaseGenerator extends Generator {
             },
             {
                 type: 'list',
+                name: 'template',
+                required: true,
+                message: '请选择需要创建的项目',
+                choices: ['react', 'vue', 'angular', 'react-mobile'],
+                default: 'react'
+            },
+            {
+                type: 'list',
                 name: 'compiler',
                 required: true,
                 message: '请选择包安装工具',
@@ -51,11 +68,68 @@ class BaseGenerator extends Generator {
             this.answers = answers;
         });
     }
+    createVue() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rootDir = path.join(process.cwd(), '');
+            const template = 'https://github.com:duanguang/vue-template';
+            yield down_1.downloadAndGenerate(template, rootDir);
+            const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+            const destinationPackageJSON = this.destinationPath('package.json');
+            this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, { appName: this.answers.appName });
+        });
+    }
+    createAngular() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rootDir = path.join(process.cwd(), '');
+            const template = 'http://192.168.1.122:3000:erp-front-project/bang-template';
+            yield down_1.downloadAndGenerate(template, rootDir);
+            const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+            const destinationPackageJSON = this.destinationPath('package.json');
+            this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, { appName: this.answers.appName });
+            const sourceAngular = `${rootDir}/.gitkeep-angular.json`;
+            const destinationAngularJSON = this.destinationPath('angular.json');
+            this.fs.copyTpl(sourceAngular, destinationAngularJSON, { appName: this.answers.appName });
+        });
+    }
+    createReact() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rootDir = path.join(process.cwd(), '');
+            const template = 'https://github.com:duanguang/react-template';
+            yield down_1.downloadAndGenerate(template, rootDir);
+            const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+            const destinationPackageJSON = this.destinationPath('package.json');
+            this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, { appName: this.answers.appName });
+        });
+    }
+    createReactMobile() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const rootDir = path.join(process.cwd(), '');
+            const template = 'https://github.com:duanguang/react-mobile-template';
+            yield down_1.downloadAndGenerate(template, rootDir);
+            const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+            const destinationPackageJSON = this.destinationPath('package.json');
+            this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, { appName: this.answers.appName });
+        });
+    }
     _writing() {
-        const { answers } = this;
-        const sourcePackageJSON = path.resolve(__dirname, '../../generators/app/templates/package.json');
-        const destinationPackageJSON = this.destinationPath('package.json');
-        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, { appName: answers.appName });
+        return __awaiter(this, void 0, void 0, function* () {
+            const { answers } = this;
+            if (answers.template === 'vue') {
+                yield this.createVue();
+            }
+            else if (answers.template === 'angular') {
+                yield this.createAngular();
+            }
+            else if (answers.template === 'react') {
+                yield this.createReact();
+            }
+            else if (answers.template === 'react-mobile') {
+                yield this.createReactMobile();
+            }
+            // const sourcePackageJSON = path.resolve(__dirname, '../../generators/app/templates/package.json');
+            // const destinationPackageJSON = this.destinationPath('package.json');
+            // this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: answers.appName});
+        });
     }
     _install() {
         const compiler = this.answers.compiler || constants_1.YARN;

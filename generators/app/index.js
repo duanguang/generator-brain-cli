@@ -8,8 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const BaseGenerator_1 = require("../../src/generator/BaseGenerator");
-const path = require("path");
-const request_1 = require("../../src/utils/request");
 class AppGenerator extends BaseGenerator_1.default {
     constructor(args, opts) {
         super(args, opts);
@@ -21,12 +19,12 @@ class AppGenerator extends BaseGenerator_1.default {
     writing() {
         const _super = name => super[name];
         return __awaiter(this, void 0, void 0, function* () {
-            _super("_writing").call(this);
-            const source = path.resolve(__dirname, './templates/src');
-            const destination = this.destinationPath('src');
-            this.fs.copy(source, destination);
-            const eConfigContent = yield request_1.default.get(`https://raw.githubusercontent.com/duanguang/generator-react-cli/master/.e-config.js`);
-            this.fs.write(this.destinationPath('.e-config.js'), eConfigContent);
+            yield _super("_writing").call(this);
+            // const source = path.resolve(__dirname, './templates/src');
+            // const destination = this.destinationPath('src');
+            // this.fs.copy(source, destination);
+            // const eConfigContent: any = await request.get(`https://raw.githubusercontent.com/duanguang/generator-react-cli/master/.e-config.js`);
+            // this.fs.write(this.destinationPath('.e-config.js'), eConfigContent);
         });
     }
     install() {

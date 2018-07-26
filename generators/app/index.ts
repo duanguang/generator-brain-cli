@@ -14,13 +14,13 @@ class AppGenerator extends BaseGenerator {
     }
 
     public async writing() {
-        super._writing();
-        const source = path.resolve(__dirname, './templates/src');
-        const destination = this.destinationPath('src');
-        this.fs.copy(source, destination);
+        await  super._writing();
+        // const source = path.resolve(__dirname, './templates/src');
+        // const destination = this.destinationPath('src');
+        // this.fs.copy(source, destination);
 
-        const eConfigContent: any = await request.get(`https://raw.githubusercontent.com/duanguang/generator-react-cli/master/.e-config.js`);
-        this.fs.write(this.destinationPath('.e-config.js'), eConfigContent);
+        // const eConfigContent: any = await request.get(`https://raw.githubusercontent.com/duanguang/generator-react-cli/master/.e-config.js`);
+        // this.fs.write(this.destinationPath('.e-config.js'), eConfigContent);
     }
 
     public install() {

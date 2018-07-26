@@ -7,7 +7,7 @@ import data from '../utils/data/index';
 import Questions = inquirer.Questions;
 import inquirer = require('inquirer');
 import Question = inquirer.Question;
-
+import  { downloadAndGenerate } from '../utils/down/down';
 export default class BaseGenerator extends Generator {
     protected answers;
 
@@ -39,6 +39,14 @@ export default class BaseGenerator extends Generator {
             },
             {
                 type: 'list',
+                name: 'template',
+                required: true,
+                message: '请选择需要创建的项目',
+                choices: ['react', 'vue','angular','react-mobile'],
+                default: 'react'
+            },
+            {
+                type: 'list',
                 name: 'compiler',
                 required: true,
                 message: '请选择包安装工具',
@@ -60,11 +68,58 @@ export default class BaseGenerator extends Generator {
         });
     }
 
-    protected _writing() {
-        const {answers} = this;
-        const sourcePackageJSON = path.resolve(__dirname, '../../generators/app/templates/package.json');
+    protected async createVue(){
+        const rootDir = path.join(process.cwd(),'');
+        const template = 'https://github.com:duanguang/vue-template';
+        await downloadAndGenerate(template,rootDir);
+        const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
         const destinationPackageJSON = this.destinationPath('package.json');
-        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: answers.appName});
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+    }
+    protected async createAngular(){
+        const rootDir = path.join(process.cwd(),'');
+        const template = 'http://192.168.1.122:3000:erp-front-project/bang-template';
+        await downloadAndGenerate(template,rootDir);
+        const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+        const destinationPackageJSON = this.destinationPath('package.json');
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+        const sourceAngular = `${rootDir}/.gitkeep-angular.json`;
+        const destinationAngularJSON = this.destinationPath('angular.json');
+        this.fs.copyTpl(sourceAngular, destinationAngularJSON, {appName: this.answers.appName});
+    }
+    protected async createReact(){
+        const rootDir = path.join(process.cwd(),'');
+        const template = 'https://github.com:duanguang/react-template';
+        await downloadAndGenerate(template,rootDir);
+        const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+        const destinationPackageJSON = this.destinationPath('package.json');
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+    }
+    protected async createReactMobile(){
+        const rootDir = path.join(process.cwd(),'');
+        const template = 'https://github.com:duanguang/react-mobile-template';
+        await downloadAndGenerate(template,rootDir);
+        const sourcePackageJSON = `${rootDir}/.gitkeep.json`;
+        const destinationPackageJSON = this.destinationPath('package.json');
+        this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: this.answers.appName});
+    } 
+    protected async _writing() {
+        const {answers} = this;
+        if(answers.template==='vue'){
+            await  this.createVue();
+         }
+         else if(answers.template==='angular'){
+             await this.createAngular();
+         }
+         else if(answers.template==='react'){
+             await this.createReact();
+         }
+         else if(answers.template==='react-mobile'){
+             await this.createReactMobile();
+         }
+        // const sourcePackageJSON = path.resolve(__dirname, '../../generators/app/templates/package.json');
+        // const destinationPackageJSON = this.destinationPath('package.json');
+        // this.fs.copyTpl(sourcePackageJSON, destinationPackageJSON, {appName: answers.appName});
     }
 
     protected _install() {

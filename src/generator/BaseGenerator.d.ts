@@ -1,3 +1,5 @@
+/// <reference types="yeoman-generator" />
+/// <reference types="inquirer" />
 import * as Generator from 'yeoman-generator';
 import inquirer = require('inquirer');
 import Question = inquirer.Question;
@@ -9,7 +11,7 @@ export default class BaseGenerator extends Generator {
         name: string;
         required: boolean;
         message: string;
-        default: any;
+        default: string;
         validate: (input: string) => string | boolean;
     } | {
         type: string;
@@ -19,8 +21,12 @@ export default class BaseGenerator extends Generator {
         choices: string[];
         default: string;
     })[];
-    protected _prompting(questions?: Question[]): any;
-    protected _writing(): void;
+    protected _prompting(questions?: Question[]): Promise<void>;
+    protected createVue(): Promise<void>;
+    protected createAngular(): Promise<void>;
+    protected createReact(): Promise<void>;
+    protected createReactMobile(): Promise<void>;
+    protected _writing(): Promise<void>;
     protected _install(): void;
     protected _end(): void;
 }
